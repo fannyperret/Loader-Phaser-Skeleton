@@ -17,7 +17,7 @@ Funny.Preloader.prototype = {
         // this.load.audio('m5', '/audio/5.mp3');
         // this.load.audio('m6', '/audio/6.mp3');
 
-        //this.load.onLoadComplete.add(this.loadComplete, this);
+        this.load.onLoadComplete.add(this.loadComplete, this);
     },
 
     loadComplete: function() {
@@ -28,6 +28,6 @@ Funny.Preloader.prototype = {
         if(this.ready === true)
         {
             this.state.start('Game');
-        }
-    }
+        },
+    },
 };
