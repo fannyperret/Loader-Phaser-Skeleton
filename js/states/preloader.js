@@ -5,7 +5,7 @@ Funny.Preloader = function(game){
 Funny.Preloader.prototype = {
 
     preload: function(){
-        this.preloadBar = this.add.sprite(10, 30, 'preloadbar');
+        this.preloadBar = this.add.sprite(100, 120, 'preloadbar');
         this.load.setPreloadSprite(this.preloadBar);
         //this.load.audio('myMusic', ['path/1.mp3', 'path/1.ogg']);
         //this.load.audio('myMusic', 'path/1.wav');
