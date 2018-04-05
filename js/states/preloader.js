@@ -1,11 +1,11 @@
-Funny.Preloader = function(game){
+Funny.Preloader = function(game) {
     this.ready = false;
 };
 
 Funny.Preloader.prototype = {
 
     preload: function(){
-        this.preloadBar = this.add.sprite(100, 120, 'preloadbar');
+        this.preloadBar = this.add.sprite(this.world.centerX, this.world.centerY, 'preloadBar');
         this.load.setPreloadSprite(this.preloadBar);
         //this.load.audio('myMusic', ['path/1.mp3', 'path/1.ogg']);
         //this.load.audio('myMusic', 'path/1.wav');
@@ -16,7 +16,8 @@ Funny.Preloader.prototype = {
         // this.load.audio('m4', '/audio/4.mp3');
         // this.load.audio('m5', '/audio/5.mp3');
         // this.load.audio('m6', '/audio/6.mp3');
-        this.load.onLoadComplete.add(this.loadComplete, this);
+
+        //this.load.onLoadComplete.add(this.loadComplete, this);
     },
 
     loadComplete: function() {
