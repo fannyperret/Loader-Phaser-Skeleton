@@ -5,8 +5,12 @@ Funny.Preloader = function(game) {
 Funny.Preloader.prototype = {
 
     preload: function(){
-        this.preloadBar = this.add.sprite(this.world.centerX, this.world.centerY, 'preloadBar');
+        this.background = this.add.sprite(this.game.world.centerX, this.game.world.centerY, 'logo');
+        this.background.anchor.setTo(2, 2);
+
+        this.preloadBar = this.add.sprite('preloadBar');
         this.load.setPreloadSprite(this.preloadBar);
+
         //this.load.audio('myMusic', ['path/1.mp3', 'path/1.ogg']);
         //this.load.audio('myMusic', 'path/1.wav');
 
@@ -28,6 +32,6 @@ Funny.Preloader.prototype = {
         if(this.ready === true)
         {
             this.state.start('Game');
-        },
+        }
     },
 };

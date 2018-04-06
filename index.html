@@ -4,15 +4,28 @@
     <meta charset="utf-8">
     <title>Progress Bar On Phaser</title>
     <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <!-- LOAD PHASER -->
     <script type="text/javascript" src="js/library/phaser.min.js"></script>
-    
+    <!-- LOADING STATES -->
     <script type="text/javascript" src="js/states/Boot.js"></script>
     <script type="text/javascript" src="js/states/Preloader.js"></script>
+    <!-- <script type="text/javascript" src="js/states/MainMenu.js"></script> -->
     <script type="text/javascript" src="js/states/Game.js"></script>
   </head>
   <body>
 
-    <script type="text/javascript" src="js/Main.js"></script>
+    <script type="text/javascript">
+      window.onload = function() {
+        var game = new Phaser.Game(800, 600, Phaser.AUTO, '');
+
+        game.state.add('Boot', Game.Boot);
+        game.state.add('Preloader', Game.Preloader);
+        game.state.add('MainMenu', Game.MainMenu);
+        game.state.add('Level1', Game.Level1);
+
+        game.state.start('Boot');
+      }
+    </script>
 
   </body>
 </html>
