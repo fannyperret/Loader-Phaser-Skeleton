@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <title>Progress Bar On Phaser</title>
-    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="assets/style.css"> -->
     <!-- LOAD PHASER -->
     <script type="text/javascript" src="js/library/phaser.min.js"></script>
     <!-- LOADING STATES -->
     <script type="text/javascript" src="js/states/Boot.js"></script>
     <script type="text/javascript" src="js/states/Preloader.js"></script>
     <!-- <script type="text/javascript" src="js/states/MainMenu.js"></script> -->
-    <script type="text/javascript" src="js/states/Game.js"></script>
+    <script type="text/javascript" src="js/states/MainMenu.js"></script>
   </head>
   <body>
 
@@ -18,13 +18,14 @@
       window.onload = function() {
         var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', {});
 
+        // ADDING STATES
         game.state.add('Boot', Game.Boot);
         game.state.add('Preloader', Game.Preloader);
         game.state.add('MainMenu', Game.MainMenu);
         game.state.add('Level1', Game.Level1);
 
+        // BEGIN THE GAME
         game.state.start('Boot');
-
       }
     </script>
 

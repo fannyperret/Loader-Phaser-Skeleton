@@ -1,28 +1,33 @@
 var Game = {};
 
-Game.Boot = function(game) {};
+Game.Boot = function(game) {
+
+  var logo;
+  var cropUp;
+};
 
 Game.Boot.prototype = {
 
-  // init:function() {
-  //   // this.stage.backgroundColor = '#2F4F4F';
-  //   // this.input.maxPointers = 1;
-  //   // this.stage.disableVisibilityChange = true;
-  // },
-
   preload: function() {
-    // this.load.image('logo', './img/logo.png');
-    this.load.image('logo1', './img/logo1.png');
     this.stage.backgroundColor = '#4488AA';
+    this.load.image('logo', './img/logo1.png');
   },
 
   create: function() {
-    // this.add.sprite(0, 0, 'logo');
-    this.add.sprite(0, 0, 'logo1');
-		game.state.start("Preload");
+    logo = this.add.sprite(this.world.centerX, this.world.centerY, 'logo');
+    logo.anchor.set(0.5);
+    logo.scale.setTo(0.6);
+
+    cropUp = new Phaser.Rectangle(0, 0, logo.width, 0);
+
+    var tween = this.game.add.tween(cropUp).to( {height: logo.height}, 3000, Phaser.Easing.Bounce.Out, false, 0, 1000, true);
+    this.logo.crop(cropUp);
+    tween.start();
   },
 
   update: function() {
     this.state.start('Preloader');
-  },
+  }
+
+
 };
