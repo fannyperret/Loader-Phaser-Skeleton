@@ -1,15 +1,27 @@
+// FIRST ACTION
 var logo;
 var cropUp;
 var tween;
+// SECOND ACTION
+var logo2;
+var pix;
+var pauseTime = 20;
+var currentTime = 0;
 
 var Preloader = {
 
 
 
   preload: function() {
-    this.stage.backgroundColor = '#4488AA';
+    this.stage.backgroundColor = '#71CDCC';
     this.load.image('sydo', './img/sydo.png');
     this.load.image('sydo2', './img/sydo2.png');
+
+    // var cropUp2 = game.add.graphics(0, 0);
+    // cropUp2.anchor.set(0.5, 0);
+    // cropUp2.beginFill(0x00FF00);
+    // cropUp2.drawRect(0, 0, 100, 100);
+    // cropUp2.endFill();
   },
 
   create: function() {
@@ -24,9 +36,31 @@ var Preloader = {
     tween = this.add.tween(cropUp).to( {height: game.height}, 3000, Phaser.Easing.Bounce.Out);
     logo.crop(cropUp)
     tween.start();
-    // tween.onComplete.add(function() {
-    //   game.state.start('Menu');
-    // });
+    tween.onComplete.add(function() {
+      // game.state.start('Menu');
+      var logoGroup = game.add.group();
+      logo2 = game.add.sprite(game.world.centerX, game.world.centerY, 'sydo2');
+      logo2.anchor.set(0.5);
+      logoGroup.add(logo2);
+
+      var cropUp2 = game.add.graphics(0, 0);
+      cropUp2.anchor.set(0.5, 0);
+      cropUp2.beginFill('#FFOOFF');
+      cropUp2.drawRect(logo2.x - logo2.width/2, logo2.y + logo2.height/2, logo2.width, logo2.height);
+      cropUp2.endFill();
+      logoGroup.mask = cropUp2;
+      var interval = setInterval(function(){
+        if(currentTime == 0){
+          var havePause = Math.floor(Math.random()*50);
+          if(havePause == 0) currentTime = parseInt(pauseTime);
+          cropUp2.y -= Math.random() * 6;
+          if(cropUp2.y <= -logo2.height) {
+            cropUp2.y = -logo2.height;
+            clearInterval(interval);
+          }
+        } else if(currentTime > 0 ) currentTime--;
+      }, 100);
+    });
   },
 
   update: function() {
@@ -34,32 +68,3 @@ var Preloader = {
   },
 
 };
-
-
-
-// Game.Preloader = function(game) {
-//
-//   var logo;
-//   var logo2;
-//   var cropUp;
-// };
-//
-// Game.Preloader.prototype = {
-//
-//     preload: function() {
-//       // this.load.image('logo', './img/logo1.png');
-//       this.load.image('logo2', './img/logo2.png');
-//     },
-//
-//     create: function() {
-//       // this.add.sprite(0, 0, 'logo');
-//       // logo = this.add.sprite(this.world.centerX, this.world.centerY, 'logo');
-//       // logo.anchor.set(0.5);
-//       // logo.scale.setTo(0.6);
-//
-//       logo2 = this.add.sprite(10, 10, 'logo2');
-//       logo2.anchor.set(0.5);
-//       logo2.scale.setTo(0.6);
-//     },
-//
-// };
