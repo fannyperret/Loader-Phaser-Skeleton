@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>Progress Bar On Phaser</title>
     <!-- <link rel="stylesheet" type="text/css" href="assets/style.css"> -->
     <!-- LOAD PHASER -->
@@ -9,29 +10,14 @@
     <!-- LOADING STATES -->
     <script type="text/javascript" src="js/states/Boot.js"></script>
     <script type="text/javascript" src="js/states/Preloader.js"></script>
-    <!-- <script type="text/javascript" src="js/states/MainMenu.js"></script> -->
-    <script type="text/javascript" src="js/states/MainMenu.js"></script>
+      <script type="text/javascript" src="js/states/Game.js"></script>
   </head>
+
   <body>
 
-    <script type="text/javascript">
-      window.onload = function() {
-        var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game', {});
-
-        // ADDING STATES
-        game.state.add('Boot', Game.Boot);
-        game.state.add('Preloader', Game.Preloader);
-        game.state.add('MainMenu', Game.MainMenu);
-        game.state.add('Level1', Game.Level1);
-
-        // BEGIN THE GAME
-        game.state.start('Boot');
-      }
-    </script>
-
-    <div id="game">
-
-    </div>
+    <!-- This is the div that will map the first file -->
+    <div id="game"></div>
 
   </body>
+
 </html>

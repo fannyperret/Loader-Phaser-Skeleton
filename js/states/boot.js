@@ -1,33 +1,16 @@
-var Game = {};
-
-Game.Boot = function(game) {
-
-  var logo;
-  var cropUp;
-};
-
-Game.Boot.prototype = {
+var Boot = {
 
   preload: function() {
-    this.stage.backgroundColor = '#4488AA';
-    this.load.image('logo', './img/logo1.png');
+
+    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+    game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
   },
 
   create: function() {
-    logo = this.add.sprite(this.world.centerX, this.world.centerY, 'logo');
-    logo.anchor.set(0.5);
-    logo.scale.setTo(0.6);
-
-    cropUp = new Phaser.Rectangle(0, 0, logo.width, 0);
-
-    var tween = this.game.add.tween(cropUp).to( {height: logo.height}, 3000, Phaser.Easing.Bounce.Out, false, 0, 1000, true);
-    this.logo.crop(cropUp);
-    tween.start();
+    // Starting the physics system - in case we are using ARCADE physics engine
+    game.physics.startSystem(Phaser.Physics.ARCADE);
+    // Calling Preloader State
+    game.state.start('Preloader');
   },
-
-  update: function() {
-    this.state.start('Preloader');
-  }
-
 
 };
