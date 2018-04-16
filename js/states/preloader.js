@@ -22,7 +22,7 @@ var Preloader = {
     this.load.image('sydo', './img/sydo.png');
     this.load.image('sydo2', './img/sydo2.png');
 
-    // SEASON: here you can use very different seasons: automn, winter, spring and summer depending on TimeEvent.
+    // SEASONS: here you can use very different seasons: automn, winter, spring and summer depending on TimeEvent.
     // WINTER
     this.stage.backgroundColor = '#c7f7ff';
     this.load.spritesheet('snow', './img/snow.png', 17, 17);
