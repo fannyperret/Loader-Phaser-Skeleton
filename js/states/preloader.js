@@ -50,8 +50,6 @@ var Preloader = {
 
   create: function() {
 
-    
-
 
     // FOUR SEASONS
 
