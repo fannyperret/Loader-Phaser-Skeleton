@@ -1,3 +1,6 @@
+var currentSeason;
+var strSeasons = ['spring', 'summer', 'automn', 'winter'];
+
 // FIRST ACTION
 var logo;
 var cropUp;
@@ -21,20 +24,16 @@ var Preloader = {
 
     // SEASONS: here you can use very different seasons: automn, winter, spring and summer depending on TimeEvent.
     // WINTER
-    this.stage.backgroundColor = '#c7f7ff';
     this.load.spritesheet('snow', './img/snow.png', 17, 17);
     this.load.spritesheet('snow2', './img/snow2.png', 64, 64);
     // SPRING
-    this.stage.backgroundColor = '#c7f7ff';
     this.load.image('spring', './img/spring.png');
     // AUTOMN
-    this.stage.backgroundColor = '#c19166'; // automn
     this.load.spritesheet('leaf', './img/leaf1.png');
     this.load.spritesheet('leaf2', './img/leaf2.png');
     this.load.spritesheet('leaf3', './img/leaf3.png');
     this.load.spritesheet('leaf4', './img/leaf4.png');
     // SUMMER
-    this.stage.backgroundColor = '#c7f7ff';
     this.load.spritesheet('sun', './img/sun.png');
     this.load.spritesheet('shark', './img/shark.png');
 
@@ -48,90 +47,119 @@ var Preloader = {
   create: function() {
 
     // FOUR SEASONS
+    var now = Date.now();
+    now = new Date('Jun 30 1991');
+    var seasons = Date.getSeasons(now.getFullYear());
+    seasons.shift();
 
-    // WINTER particles
-    var emitter = game.add.emitter(game.world.centerX, 0, 400);
-    emitter.width = game.world.width;
-    emitter.angle = -10;
-    emitter.makeParticles('snow', [0, 1, 2, 3, 4, 5]);
-    emitter.setYSpeed(-1, 5)
-    emitter.minParticleScale = 0.1;
-    emitter.maxParticleScale = 1;
-    emitter.flow(5000, 100, 7, -1);
+    // POUR TESTER
+    console.log(now);
+    console.log(seasons);
+    //
+    for(var i = 0; i < seasons.length; i++) {
+        var seasonTime = new Date(seasons[i]);
+        var seasonOneTime = new Date(seasons[i + 1]);
+        if(now > seasonTime && now < seasonOneTime){
+          currentSeason = strSeasons[i];
+        }
+    }
+    if(currentSeason == null) currentSeason = strSeasons[strSeasons.length-1];
 
-    var back_emitter = game.add.emitter(game.world.centerX, -10, 400);
-    back_emitter.width = game.world.width;
-    back_emitter.angle = -50;
-    back_emitter.makeParticles('snow', [0, 1, 2, 3, 4, 5]);
-    back_emitter.setYSpeed(5, 30);
-    back_emitter.maxParticleScale = 0.6;
-    back_emitter.minParticleScale = 0.2;
-    back_emitter.minRotation = 0;
-    back_emitter.maxRotation = 40;
+    if(currentSeason == 'winter') {
+      // WINTER particles
+      this.stage.backgroundColor = '#8eb5ba';
+      var emitter = game.add.emitter(game.world.centerX, 0, 400);
+      emitter.width = game.world.width;
+      emitter.angle = -10;
+      emitter.makeParticles('snow', [0, 1, 2, 3, 4, 5]);
+      emitter.setYSpeed(-1, 5)
+      emitter.minParticleScale = 0.1;
+      emitter.maxParticleScale = 1;
+      emitter.flow(5000, 100, 7, -1);
 
-    var front_emitter = game.add.emitter(game.world.centerX, -10, 500);
-    front_emitter.width = game.world.width;
-    front_emitter.angle = -50;
-    front_emitter.makeParticles('snow2', [0, 1, 2, 3, 4, 5]);
-    front_emitter.setYSpeed(10, 20);
-    front_emitter.maxParticleScale = 0.8;
-    front_emitter.minParticleScale = 0.1;
-    front_emitter.minRotation = 0;
-    front_emitter.maxRotation = 40;
-    front_emitter.flow(5000, 100, 1, -1);
+      var back_emitter = game.add.emitter(game.world.centerX, -10, 400);
+      back_emitter.width = game.world.width;
+      back_emitter.angle = -50;
+      back_emitter.makeParticles('snow', [0, 1, 2, 3, 4, 5]);
+      back_emitter.setYSpeed(5, 30);
+      back_emitter.maxParticleScale = 0.6;
+      back_emitter.minParticleScale = 0.2;
+      back_emitter.minRotation = 0;
+      back_emitter.maxRotation = 40;
 
-    // SPRING particles
-    var emitter = game.add.emitter(game.world.centerX, 0, 400);
-    emitter.width = game.world.width;
-    emitter.angle = -10;
-    emitter.makeParticles('spring');
-    emitter.minParticleSpeed.setTo(-300, 30);
-    emitter.maxParticleSpeed.setTo(50, 20);
-    emitter.minParticleScale = 0.1;
-    emitter.maxParticleScale = 0.5;
-    emitter.gravity = 200;
-    emitter.flow(7000, 600, 4, -1);
+      var front_emitter = game.add.emitter(game.world.centerX, -10, 500);
+      front_emitter.width = game.world.width;
+      front_emitter.angle = -50;
+      front_emitter.makeParticles('snow2', [0, 1, 2, 3, 4, 5]);
+      front_emitter.setYSpeed(10, 20);
+      front_emitter.maxParticleScale = 0.8;
+      front_emitter.minParticleScale = 0.1;
+      front_emitter.minRotation = 0;
+      front_emitter.maxRotation = 40;
+      front_emitter.flow(5000, 100, 1, -1);
+    }
 
-    // AUTOMN particles
-    var little_emitter = game.add.emitter(game.world.centerX, 0, 500);
-    little_emitter.width = game.world.width;
-    little_emitter.angle = -10;
-    little_emitter.makeParticles('leaf');
-    little_emitter.setYSpeed(-1, 5)
-    little_emitter.minParticleScale = 0.1;
-    little_emitter.maxParticleScale = 0.6;
-    little_emitter.flow(5000, 100, 2, -1);
+    if(currentSeason == 'spring') {
+      // SPRING particles
+      this.stage.backgroundColor = '#87dd91';
+      var emitter = game.add.emitter(game.world.centerX, -50, 500);
+      emitter.width = game.world.width;
+      emitter.angle = -5;
+      emitter.makeParticles('spring');
+      emitter.minParticleSpeed.setTo(-300, 10);
+      emitter.maxParticleSpeed.setTo(50, 20);
+      emitter.minParticleScale = 0.1;
+      emitter.maxParticleScale = 0.5;
+      emitter.gravity = 200;
+      emitter.flow(7000, 200, 7, -1);
+    }
 
-    var emitter = game.add.emitter(game.world.centerX, 0, 500);
-    emitter.width = game.world.width;
-    emitter.angle = -10;
-    emitter.makeParticles('leaf4');
-    emitter.setYSpeed(-1, 5)
-    emitter.minParticleScale = 0.1;
-    emitter.maxParticleScale = 0.2;
-    emitter.flow(5000, 100, 1, -1);
+    if(currentSeason == 'summer') {
+      // SUMMER particles
+      this.stage.backgroundColor = '#c7f7ff';
+      sun = game.add.sprite(game.width/2, game.height, 'sun');
+      sun.anchor.setTo(0.5);
+      sun.pivot.x = game.width/2;
+      sun.pivot.y = game.height/2;
+      sun.rotation = game.math.degToRad(120);
 
-    var back_emitter = game.add.emitter(game.world.centerX, -300, 800);
-    back_emitter.width = game.world.width;
-    back_emitter.angle = 20;
-    back_emitter.makeParticles('leaf2');
-    back_emitter.setYSpeed(5, 30);
-    back_emitter.maxParticleScale = 0.8;
-    back_emitter.minParticleScale = 0.5;
-    back_emitter.minRotation = 0;
-    back_emitter.maxRotation = 20;
-    back_emitter.flow(5000, 100, 1, -1);
+      shark = game.add.sprite(-1000, 430, 'shark');
+      shark.anchor.set(0.1);
+      shark.play(true);
+    }
 
-    // SUMMER particles
-    sun = game.add.sprite(game.width/2, game.height, 'sun');
-    sun.anchor.setTo(0.5);
-    sun.pivot.x = game.width/2;
-    sun.pivot.y = game.height/2;
-    sun.rotation = game.math.degToRad(120);
+    if(currentSeason == 'automn') {
+      // AUTOMN particles
+      this.stage.backgroundColor = '#c19166';
+      var little_emitter = game.add.emitter(game.world.centerX, 0, 500);
+      little_emitter.width = game.world.width;
+      little_emitter.angle = -10;
+      little_emitter.makeParticles('leaf');
+      little_emitter.setYSpeed(-1, 5)
+      little_emitter.minParticleScale = 0.1;
+      little_emitter.maxParticleScale = 0.6;
+      little_emitter.flow(5000, 100, 2, -1);
 
-    shark = game.add.sprite(-1000, 430, 'shark');
-    shark.anchor.set(0.1);
-    shark.play(true);
+      var emitter = game.add.emitter(game.world.centerX, 0, 500);
+      emitter.width = game.world.width;
+      emitter.angle = -10;
+      emitter.makeParticles('leaf4');
+      emitter.setYSpeed(-1, 5)
+      emitter.minParticleScale = 0.1;
+      emitter.maxParticleScale = 0.2;
+      emitter.flow(5000, 100, 1, -1);
+
+      var back_emitter = game.add.emitter(game.world.centerX, -300, 800);
+      back_emitter.width = game.world.width;
+      back_emitter.angle = 20;
+      back_emitter.makeParticles('leaf2');
+      back_emitter.setYSpeed(5, 30);
+      back_emitter.maxParticleScale = 0.8;
+      back_emitter.minParticleScale = 0.5;
+      back_emitter.minRotation = 0;
+      back_emitter.maxRotation = 20;
+      back_emitter.flow(5000, 100, 1, -1);
+    }
 
     // BASICS ANIMATIONS
     logo = this.add.sprite(game.world.centerX, game.world.centerY, 'sydo');
@@ -171,32 +199,34 @@ var Preloader = {
       }, 100);
     });
 
-    // AUTOMN particles
-    var front_emitter = game.add.emitter(game.world.centerX, -10, 500);
-    front_emitter.width = game.world.width;
-    front_emitter.angle = -40;
-    front_emitter.makeParticles('leaf3');
-    front_emitter.setYSpeed(10, 20);
-    front_emitter.maxParticleScale = 0.8;
-    front_emitter.minParticleScale = 0.5;
-    front_emitter.minRotation = 10;
-    front_emitter.maxRotation = 25;
-    front_emitter.flow(5000, 100, 1, -1);
-
+    if(currentSeason == 'automn') {
+      // AUTOMN particles
+      var front_emitter = game.add.emitter(game.world.centerX, -10, 500);
+      front_emitter.width = game.world.width;
+      front_emitter.angle = -40;
+      front_emitter.makeParticles('leaf3');
+      front_emitter.setYSpeed(10, 20);
+      front_emitter.maxParticleScale = 0.8;
+      front_emitter.minParticleScale = 0.5;
+      front_emitter.minRotation = 10;
+      front_emitter.maxRotation = 25;
+      front_emitter.flow(5000, 100, 1, -1);
+    }
   },
 
   update: function() {
 
     logo.updateCrop();
 
-    // Summer, shark and sunshine
-    shark.x += 10;
-    if (shark.x > 30000)
-    {
-        shark.x = -1000;
+    if(currentSeason == 'summer'){
+      // Summer, shark and sunshine
+      shark.x += 10;
+      if (shark.x > 30000)
+      {
+          shark.x = -1000;
+      }
+      sun.rotation -= 0.0009;
     }
-
-    sun.rotation -= 0.0009;
   },
 
 };
