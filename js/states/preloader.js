@@ -1,6 +1,3 @@
-// getDate
-var date;
-
 // FIRST ACTION
 var logo;
 var cropUp;
@@ -49,7 +46,6 @@ var Preloader = {
   },
 
   create: function() {
-
 
     // FOUR SEASONS
 
@@ -136,8 +132,6 @@ var Preloader = {
     shark = game.add.sprite(-1000, 430, 'shark');
     shark.anchor.set(0.1);
     shark.play(true);
-
-
 
     // BASICS ANIMATIONS
     logo = this.add.sprite(game.world.centerX, game.world.centerY, 'sydo');
